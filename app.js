@@ -2,6 +2,8 @@ const express = require('express');
 var app = express();
 var path = require('path');
 
+app.use('/public',express.static('public'));
+
 function pet(name, age, type){
     this.name = name;
     this.age = age;
@@ -20,5 +22,13 @@ app.get('/', (req, res) => {
 app.get('/data', (req, res) => {
     res.json(data)
    });
+
+app.get('/info', (req, res) => {
+    res.sendFile(path.join(__dirname + '/cat.html'))
+});
+
+app.get('/pictures', (req, res) => {
+    res.sendFile(path.join(__dirname + '/pictures.html'))
+});
 
 app.listen(process.env.PORT || 8080)
